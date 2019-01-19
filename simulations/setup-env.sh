@@ -20,7 +20,12 @@ FLAVOURS="mapme" # default, mapme, vanilla
 CLEAN=false
 
 DEFAULT_DIR="$HOME/bin"
-ARCH=64
+####ARCH=64
+
+########################## My changes ##################################
+ARCH=$(test -d /usr/lib64 -a ! -d /usr/lib32 && echo "64" || echo "")
+###############################################################
+
 
 ################################################################################
 # Command line parsing
@@ -59,8 +64,12 @@ fi
 
 DEPS="git r-base-core"
 
-NS3CONFIG=""
+##NS3CONFIG=""
 #--enable-examples --enable-tests"
+
+############# my changes #################
+NS3CONFIG="--boost-includes=/usr/local/include --boost-libs=/usr/local/lib"
+##########################################
 
 GITHUB_CLONE_HEADER="https://github.com/"
 #GITHUB_CLONE_HEADER="git@github.com:"
@@ -78,7 +87,10 @@ NFD_DIR_TMP="NFD"
 NFD_DIR=""
 NFD_DEPS="libsqlite3-dev libcrypto++-dev libboost-all-dev"
 
-PBG_REPO="${GITHUB_CLONE_HEADER}named-data-ndnSIM/pybindgen.git"
+################### my changes ###################
+##PBG_REPO="${GITHUB_CLONE_HEADER}named-data-ndnSIM/pybindgen.git"
+PBG_REPO="${GITHUB_CLONE_HEADER}mapme-tnsm17/pybindgen.git"
+##################################################
 PBG_DIR="pybindgen"
 PBG_DEPS="gccxml"
 
@@ -407,4 +419,3 @@ case $1 in
         help
         ;;
 esac
-
